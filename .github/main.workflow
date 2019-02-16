@@ -15,6 +15,7 @@ workflow "Upload on release" {
   resolves = [
     "JasonEtco/upload-to-release@v0.1.1",
     "samueldr/action-nix-build@master-1",
+    "samueldr/action-nix-build@master-2",
   ]
 }
 
@@ -25,9 +26,18 @@ action "samueldr/action-nix-build@master-1" {
   }
 }
 
+action "samueldr/action-nix-build@master-2" {
+  uses = "samueldr/action-nix-build@master"
+  needs = ["samueldr/action-nix-build@master-1"]
+  runs = [ "sh", "-c", "ls -lA result/"]
+  env = {
+    NIXPKGS_ALLOW_UNFREE = "1"
+  }
+}
+
 action "JasonEtco/upload-to-release@v0.1.1" {
   uses = "JasonEtco/upload-to-release@v0.1.1"
-  needs = ["samueldr/action-nix-build@master-1"]
+  needs = ["samueldr/action-nix-build@master-2"]
   args = "result/ROC-RK3399-PC-firmware-combined.img.xz"
   secrets = ["GITHUB_TOKEN"]
 }
