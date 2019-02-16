@@ -29,7 +29,7 @@ action "samueldr/action-nix-build@master-1" {
 action "samueldr/action-nix-build@master-2" {
   uses = "samueldr/action-nix-build@master"
   needs = ["samueldr/action-nix-build@master-1"]
-  runs = ["sh", "-c", "ls -lA result/"]
+  runs = ["sh", "-c", "ls -lA"]
   env = {
     NIXPKGS_ALLOW_UNFREE = "1"
   }
@@ -45,6 +45,6 @@ action "JasonEtco/upload-to-release@v0.1.1" {
 action "samueldr/action-nix-build@master-3" {
   uses = "samueldr/action-nix-build@master"
   needs = ["samueldr/action-nix-build@master"]
-    runs = ["sh", "-c", "ls -lA result/"]
+    runs = ["sh", "-c", "ls -lA"]
 
 }
