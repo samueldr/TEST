@@ -46,5 +46,4 @@ action "samueldr/action-nix-build@master-3" {
   uses = "samueldr/action-nix-build@test/keeping-nix-stuff"
   needs = ["samueldr/action-nix-build@test/keeping-nix-stuff"]
     runs = ["sh", "-c", "ls -lA"]
-
 }
