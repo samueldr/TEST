@@ -3,8 +3,8 @@ workflow "Build on push" {
   resolves = ["samueldr/action-nix-build@master-3"]
 }
 
-action "samueldr/action-nix-build@master" {
-  uses = "samueldr/action-nix-build@master"
+action "samueldr/action-nix-build@test/keeping-nix-stuff" {
+  uses = "samueldr/action-nix-build@test/keeping-nix-stuff"
   env = {
     NIXPKGS_ALLOW_UNFREE = "1"
   }
@@ -20,14 +20,14 @@ workflow "Upload on release" {
 }
 
 action "samueldr/action-nix-build@master-1" {
-  uses = "samueldr/action-nix-build@master"
+  uses = "samueldr/action-nix-build@test/keeping-nix-stuff"
   env = {
     NIXPKGS_ALLOW_UNFREE = "1"
   }
 }
 
 action "samueldr/action-nix-build@master-2" {
-  uses = "samueldr/action-nix-build@master"
+  uses = "samueldr/action-nix-build@test/keeping-nix-stuff"
   needs = ["samueldr/action-nix-build@master-1"]
   runs = ["sh", "-c", "ls -lA"]
   env = {
@@ -43,8 +43,8 @@ action "JasonEtco/upload-to-release@v0.1.1" {
 }
 
 action "samueldr/action-nix-build@master-3" {
-  uses = "samueldr/action-nix-build@master"
-  needs = ["samueldr/action-nix-build@master"]
+  uses = "samueldr/action-nix-build@test/keeping-nix-stuff"
+  needs = ["samueldr/action-nix-build@test/keeping-nix-stuff"]
     runs = ["sh", "-c", "ls -lA"]
 
 }
